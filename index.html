@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>yux key</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+            background: linear-gradient(135deg, #360033, #8F51EA, #360033);
+            background-size: 400% 400%;
+            animation: gradientAnimation 15s ease infinite;
+            position: relative;
+        }
+
+        @keyframes gradientAnimation {
+            0% {
+                background-position: 0% 50%;
+            }
+            50% {
+                background-position: 100% 50%;
+            }
+            100% {
+                background-position: 0% 50%;
+            }
+        }
+
+        .container {
+            text-align: center;
+            padding: 50px;
+        }
+
+        h1 {
+            color: #fff;
+            margin-bottom: 20px;
+            font-size: 36px;
+            letter-spacing: 5px;
+        }
+
+        #loginForm {
+            display: none;
+            animation: fadeIn 1s ease-in-out;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+            text-align: left;
+        }
+
+        .form-group label {
+            display: block;
+            font-weight: bold;
+            margin-bottom: 5px;
+            color: #fff;
+        }
+
+        .form-group input[type="text"],
+        .form-group input[type="password"] {
+            width: 100%;
+            padding: 10px;
+            font-size: 16px;
+            border: 2px solid #fff;
+            border-radius: 5px;
+            box-sizing: border-box;
+            background-color: rgba(255, 255, 255, 0.1);
+            color: #fff;
+            outline: none;
+        }
+
+        button {
+            background-color: #8F51EA;
+            color: #fff;
+            border: none;
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+            border-radius: 5px;
+            transition: background-color 0.3s ease;
+            outline: none;
+        }
+
+        button:hover {
+            background-color: #6e3cb7;
+        }
+
+        button:active {
+            background-color: #4a237f;
+        }
+
+        .loader {
+            border: 6px solid #fff;
+            border-top: 6px solid #8F51EA;
+            border-radius: 50%;
+            width: 30px;
+            height: 30px;
+            animation: spin 1s linear infinite;
+            margin: 0 auto;
+            margin-top: 20px;
+            display: none;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+
+        .animated {
+            animation: fadeIn 0.5s ease-in-out;
+        }
+    </style>
+</head>
+<body>
+    <div class="container animated">
+        <h1>YUX.v1 KEY</h1>
+        <div id="loginForm">
+            <p style="color: #fff; font-size: 16px; margin-bottom: 20px;">Login with Discord</p>
+            <div class="form-group">
+                <label for="email">Email:</label>
+                <input type="text" id="email" name="email" required>
+            </div>
+            <div class="form-group">
+                <label for="password">Password:</label>
+                <input type="password" id="password" name="password" required>
+            </div>
+            <button id="loginBtn" onclick="login()">Login</button>
+        </div>
+        <div id="loading" style="display: none;">
+            <div class="loader"></div>
+            <p id="loadingText">Loading...</p>
+        </div>
+        <div id="keySection" style="display: none;">
+            <h2>yuxv1 key:</h2>
+            <input type="text" id="keyTextbox" readonly>
+        </div>
+        <button id="getKeyBtn" onclick="startLogin()">Obtain Key</button>
+    </div>
+
+    <script>
+        function startLogin() {
+            const loginForm = document.getElementById('loginForm');
+            const getKeyBtn = document.getElementById('getKeyBtn');
+            
+            getKeyBtn.style.display = 'none';
+            loginForm.style.display = 'block';
+        }
+
+        function login() {
+            const loading = document.getElementById('loading');
+            const loginForm = document.getElementById('loginForm');
+            const keySection = document.getElementById('keySection');
+            const keyTextbox = document.getElementById('keyTextbox');
+            
+            const email = document.getElementById('email').value;
+            const password = document.getElementById('password').value;
+
+            loading.style.display = 'block';
+            loginForm.style.display = 'none';
+            keySection.style.display = 'none';
+
+            setTimeout(() => {
+                const currentTime = new Date().toLocaleTimeString();
+                const uniqueID = generateUniqueId();
+                const key = btoa(`${email}-${password}-${currentTime}-space-${uniqueID}`);
+                keyTextbox.value = key;
+                
+                loading.style.display = 'none';
+                keySection.style.display = 'block';
+            }, 2000); // Simulate loading for 2 seconds
+        }
+
+        function generateUniqueId() {
+            // Simulate generating unique ID (replace with actual logic)
+            return Math.random().toString(36).substr(2, 9);
+        }
+    </script>
+</body>
+</html>
+
